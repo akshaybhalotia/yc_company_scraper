@@ -1,26 +1,21 @@
 <!-- PROJECT LOGO -->
 <p align="center">
-  <a href="https://axy.one">
-    <img src="https://gravatar.com/avatar/96cf8b9421cac6ff337f4264aa02448f?s=500" alt="Logo" width="80">
+  <a href="https://ycombinator.com">
+    <img src="https://www.ycombinator.com/assets/ycdc/ycombinator-logo-37cf030fbc255fc71d19aa21bd5b32076aa206e8fbd0121c9247db2adcbd7851.png" alt="Logo" width="80">
   </a>
 
-  <h2 align="center">readme-template by akshaybhalotia</h3>
+  <h2 align="center">yc_company_scraper by akshaybhalotia</h3>
 
   <p align="center">
-    ADD_DESCRIPTION_HERE
+    Barebones scraper for listing all YC companies
     <br />
-    <a href=""><strong>Explore the docs »</strong></a>
-    <br />
-    <br />
-    <a href="">View Demo</a>
+    <a href="https://github.com/akshaybhalotia/yc_company_scraper/blob/main/data/yc_essential_data.json">View Data</a>
     ·
-    <a href="https://github.com/akshaybhalotia/readme-template/issues">Report Bug</a>
+    <a href="https://github.com/akshaybhalotia/yc_company_scraper/issues">Report Bug</a>
     ·
-    <a href="https://github.com/akshaybhalotia/readme-template/issues">Request Feature</a>
+    <a href="https://github.com/akshaybhalotia/yc_company_scraper/issues">Request Feature</a>
   </p>
 </p>
-
-<div align="center">(insert badges here)</div>
 
 <!-- TABLE OF CONTENTS -->
 
@@ -33,16 +28,12 @@
   - [Installing](#installing)
   - [Usage](#usage)
     - [Run locally](#run-project-locally)
-    - [Run tests](#run-tests)
-    - [Build for distribution](#build-for-distribution)
-    - [Server distribution](#instructions-to-serve-distribution=build)
   - [Help](#help)
 - [Versioning](#versioning)
   - [Version History](#version-history)
 - [Roadmap](#roadmap)
 - [Contributing](#contributing)
 - [Support](#support)
-- [Credits](#credits)
 - [License](#license)
 - [Acknowledgments](#acknowledgments)
 - [About Authors](#about-authors)
@@ -51,19 +42,13 @@
 
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
-
-(An in-depth paragraph about your project and overview of use.)
-
-Use this repository as a base template to start a new repository with a guided README. The linked files such as LICENSE, CONTRIBUTING guide and CODE OF CONDUCT are optional, though highly recommended.
-
-Here's a blank template to get started:
-**To avoid retyping too much info. Do a search and replace with your text editor for the following:**
-`readme-template`
+This is an attempt to get publicly available data for all Y-Combinator (fondly known as "YC") backed companies, as available at the official ["startup directory"](https://www.ycombinator.com/companies/).
 
 ### Built With
 
-- VS Code
+- [jq](https://stedolan.github.io/jq/)
+- [Ruby](https://www.ruby-lang.org/)
+- [VS Code](https://code.visualstudio.com/)
 - 
 - :heart:
 
@@ -71,109 +56,55 @@ Here's a blank template to get started:
 
 ## Getting Started
 
-(General instructions to get started)
+You can clone or download the repo, and run the `refresh_data.sh` to refresh the data. You may also look at the other scripts if you want to run individual tasks or learn more about the project.
 
-Simply clone or fork this repo and follow instructions in parantheses `(` & `)` to make edits to suit your needs.
-
-Or use the repo as a template using Github, follow instructions here: https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template#creating-a-repository-from-a-template
+If you just want to view the data, you can look into the `data` directory.
 
 ## Dependencies
 
-(Describe any prerequisites, libraries, OS version, etc., needed before installing program. Ex OS with min version, runtime env with min and max version.)
+To run these scripts locally, you would need
 
-This is an example of how to list things you need to use the software and how to install them.
-
-- npm
-
-```sh
-npm install npm@latest -g
-```
+- Ruby language (if not pre-installed, visit https://www.ruby-lang.org/en/documentation/installation/)
+  ```sh
+  ruby -v
+  ```
+- jq (download using OS and distribution specific version from https://stedolan.github.io/jq/download/)
 
 ## Installing
 
-- (How/where to download your code)
-- (Any modifications needed to be made to files/folders)
-
-1. Clone the repo
+Clone the repo
 
 ```sh
-git clone https://github.com/akshaybhalotia/readme-template.git
-```
-
-2. Install NPM packages
-
-```sh
-npm install
+git clone https://github.com/akshaybhalotia/yc_company_scraper.git
 ```
 
 <!-- USAGE EXAMPLES -->
 
 ## Usage
 
-- (How to run the code)
-- (Step-by-step bullets)
-
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-```
-code blocks for commands
-```
-
 ### Run project locally
 
-- (Step-by-step bullets)
-
+```shell
+sh refresh_data.sh
 ```
-code blocks for commands
-```
-
-### Run tests
-
-- (Step-by-step bullets)
-
-```
-code blocks for commands
-```
-
-### Build for distribution
-
-- (Step-by-step bullets)
-
-```
-code blocks for commands
-```
-
-### Instructions to serve distribution build
-
-- (Step-by-step bullets)
-
-```
-code blocks for commands
-```
-
-_For more commands and examples, please refer to the [Documentation](https://example.com)._
 
 ## Help
 
-(Any advise for common problems or issues.)
+You might encounter 3 kinds of issues:
 
-```
-command to run if program contains helper info
-```
+1. `ruby` or `jq` related: Something might change with the future (or past) versions of the Ruby lang or jq tool, causing the scripts to break. This script has been tested on ruby `v2.7.x` and `v3.0.x`, and jq `v1.6`. Your best bet is to read the official changelogs to figure out what changed and how to fix it. Submit a PR too! (Or you could ping me, I'll look at it in my free time - no promises)
 
-(FAQs)
+2. OS related: I built this script on macOS `v12.1`, but is mostly generic enough to be run on all UNIX-derived, UNIX-like or Linux-like systems. If you still run into errors, please look at OS specific instructions to run the Ruby lang and `jq` properly.
+
+3. Data related: Y-Combinator or Algolia may decide to change their APIs or data formats, which is always a risk for scrapers if something at the data source changes. If you can figure out what changed, you might want to submit a PR. (Or, again, you could ping me but no promises)
 
 <!-- CHANGELOG -->
 
 ## Versioning
 
-(Details about the versioning system followed)
-
-We use [SemVer](https://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/akshaybhalotia/readme-template/tags).
+We use [SemVer](https://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/akshaybhalotia/yc_company_scraper/tags).
 
 ### Version History
-
-(History of changes made in each version, since this is expected to get long over time it is recommended to keep in a separate file)
 
 See [CHANGELOG](./CHANGELOG.md).
 
@@ -181,58 +112,36 @@ See [CHANGELOG](./CHANGELOG.md).
 
 ## Roadmap
 
-See the [open issues](https://github.com/akshaybhalotia/readme-template/issues) for a list of proposed features (and known issues).
+See the [open issues](https://github.com/akshaybhalotia/yc_company_scraper/issues) for a list of proposed features (and known issues).
 
 <!-- CONTRIBUTING -->
 
 ## Contributing
 
-(Add a guide for anyone to be able to contribute to the project, either on the readme or as a separate file)
-
-Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**. Sincere thanks to all our contributors. Thank you, [contributors](https://github.com/akshaybhalotia/readme-template/graphs/contributors)!
+Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**. Sincere thanks to all our contributors. Thank you, [contributors](https://github.com/akshaybhalotia/yc_company_scraper/graphs/contributors)!
 
 You are requested to follow the contribution guidelines specified in [CONTRIBUTING.md](./CONTRIBUTING.md) and code of conduct at [CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md) while contributing to the project :smile:.
 
 ## Support
 
-(Ask for support or sponsorships by providing links or just add a simple message)
-
 Contributions, issues, and feature requests are welcome!
-Give a ⭐️ if you like this project!
-
-## Credits
-
-(Write credits for ideas, special contributions, etc.)
+Give a ⭐️ if you like this project. Donate $$ at https://paypal.me/akshaybhalotia if you like this work.
 
 <!-- LICENSE -->
 
 ## License
 
-(Legal license info)
-
 This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
 
 ## Acknowledgments
 
-(Inspiration, code snippets, etc.)
+This project is inspired by:
 
-This template is inspired by:
+- [yclist](https://yclist.com)
+- [yclist code](https://github.com/linrock/yclist)
 
-- [git-template](https://github.com/multunus/git-template)
-- [awesome-readme](https://github.com/matiassingers/awesome-readme)
-- [PurpleBooth](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2)
-- [dbader](https://github.com/dbader/readme-template)
-- [zenorocha](https://gist.github.com/zenorocha/4526327)
-- [fvcproductions](https://gist.github.com/fvcproductions/1bfc2d4aecb01a834b46)
+When I didn't find a source to download the data for all YC companies, and came across this repo with outdated data - I decided to build my own. I hope to have enough time at some point to update the data at [yclist](https://github.com/linrock/yclist) repo.
 
 ## About Authors
 
-(Primary names and contact info)
-
-`readme-template` is created & maintained by Akshay Bhalotia. You can find me on Twitter - [@akshay_bhalotia](https://twitter.com/akshay_bhalotia) or write to me at `github [at] axy.one`.
-
-(You can insert top collaborators here. Also you can include org level stuff here such as:
-
-The names and logos for Acme are trademarks of Acme, Inc.
-
-We love open source software! See [our other projects](your-link-1) or [hire us](your-link-2) to help build your product.)
+`yc_company_scraper` is created & maintained by Akshay Bhalotia. You can find me on Twitter - [@akshay_bhalotia](https://twitter.com/akshay_bhalotia) or write to me at `opensource [at] axy.one`.
