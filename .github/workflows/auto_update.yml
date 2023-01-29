@@ -41,5 +41,5 @@ jobs:
       - name: Access git status
         run: echo "${{ needs.diff.outputs.files }}"
       - name: Test how conditionals work
-        if: needs.diff.outputs.files != ''
+        if: needs.diff.outputs.files == ''
         run: echo "Condition passed"
