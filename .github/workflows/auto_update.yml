@@ -8,8 +8,8 @@ on:
 permissions:
   contents: read
 
-env:
-  FILES_CHANGED:
+# env:
+#   FILES_CHANGED:
 
 jobs:
   diff:
