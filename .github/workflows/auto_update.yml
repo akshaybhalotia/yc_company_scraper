@@ -8,8 +8,8 @@ on:
 permissions:
   contents: read
 
-# env:
-#   FILES_CHANGED:
+env:
+  FILES_CHANGED:
 
 jobs:
   diff:
@@ -29,6 +29,7 @@ jobs:
       - name: Check git status
         run: |
           echo "Hello world"
+          git status --porcelain -s -uall
           echo "FILES_CHANGED<<EOF" >> $GITHUB_ENV
           git status --porcelain -s -uall >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
