@@ -28,6 +28,7 @@ jobs:
         run: sh refresh_data.sh
       - name: Check git status
         run: |
+          echo "Hello world"
           echo "FILES_CHANGED<<EOF" >> $GITHUB_ENV
           git status --porcelain -s -uall >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
