@@ -23,3 +23,5 @@ jobs:
         uses: dcarbone/install-jq-action@v1.0.1
       - name: Run update script
         run: sh refresh_data.sh
+      - name: Check git status
+        run: git status -s -uall
