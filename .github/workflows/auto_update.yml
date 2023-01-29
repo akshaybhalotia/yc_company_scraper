@@ -8,8 +8,8 @@ on:
 permissions:
   contents: read
 
-env:
-  FILES_CHANGED:
+# env:
+#   FILES_CHANGED:
 
 jobs:
   diff:
@@ -28,12 +28,14 @@ jobs:
         run: sh refresh_data.sh
       - name: Check git status
         run: |
-          echo "Hello world"
           git status --porcelain -s -uall
           echo "FILES_CHANGED<<EOF" >> $GITHUB_ENV
           git status --porcelain -s -uall >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
-          echo "$FILES_CHANGED"
+      - name: Print git status
+        run: |
+          echo "${{ env.FILES_CHANGED }}"
+          echo "Hello world"
   raise-pr:
     name: Raise a PR on data diff
     runs-on: ubuntu-latest
