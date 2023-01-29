@@ -28,8 +28,8 @@ jobs:
         run: sh refresh_data.sh
       - name: Check git status
         run: |
-          git status -s -uall
-          echo "FILES_CHANGED=$(git status -s -uall)" >> $GITHUB_ENV
+          git status --porcelain -s -uall
+          echo "FILES_CHANGED=$(git status --porcelain -s -uall)" >> $GITHUB_ENV
           echo $FILES_CHANGED
   raise-pr:
     name: Raise a PR on data diff
