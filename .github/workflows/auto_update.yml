@@ -1,0 +1,25 @@
+name: Auto update the data set
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "13 13 13 * *" # on 13:13 of the 13th of every month
+
+permissions:
+  contents: read
+
+jobs:
+  diff:
+    name: Find diff
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.0"
+          # bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+      - name: Install jq
+        uses: dcarbone/install-jq-action@v1
+      - name: Run update script
+        run: sh refresh_data.sh
