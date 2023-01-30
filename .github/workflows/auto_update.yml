@@ -35,14 +35,14 @@ jobs:
         run: echo "DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
       - name: Print date
         run: echo "${{ env.DATE }}"
-      # - name: Create Pull Request
-      #   if: env.FILES_CHANGED != ''
-      #   uses: peter-evans/create-pull-request@v5-beta
-      #   with:
-      #     commit-message: "chore: data update on ${{ env.DATE }}"
-      #     branch: "chore/data-update-${{ env.DATE }}"
-      #     delete-branch: true
-      #     title: "data update: ${{ env.DATE }}"
-      #     body: "Automated data update by GitHub action"
-      #     reviewers: "akshaybhalotia"
-      #     assignees: "akshaybhalotia"
+      - name: Create Pull Request
+        if: env.FILES_CHANGED != ''
+        uses: peter-evans/create-pull-request@v5-beta
+        with:
+          commit-message: "chore: data update on ${{ env.DATE }}"
+          branch: "chore/data-update-${{ env.DATE }}"
+          delete-branch: true
+          title: "data update: ${{ env.DATE }}"
+          body: "Automated data update by GitHub action"
+          reviewers: "akshaybhalotia"
+          assignees: "akshaybhalotia"
