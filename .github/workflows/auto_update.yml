@@ -40,8 +40,10 @@ jobs:
         uses: peter-evans/create-pull-request@v5-beta
         with:
           commit-message: "chore: data update on ${{ env.DATE }}"
+          committer: "akshaybhalotia <github@axy.one>"
           branch: "chore/data-update-${{ env.DATE }}"
           delete-branch: true
+          base: main
           title: "data update: ${{ env.DATE }}"
           body: "Automated data update by GitHub action"
           reviewers: "akshaybhalotia"
