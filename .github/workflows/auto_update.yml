@@ -9,8 +9,8 @@ permissions:
   contents: read
 
 jobs:
-  diff:
-    name: Find diff
+  diff-and-raise-pr:
+    name: Find diff and raise PR if there is a data change
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -25,30 +25,24 @@ jobs:
       - name: Check git status
         id: git_check
         run: |
-          echo "FILES_CHANGED<<EOF" >> $GITHUB_OUTPUT
-          git status --porcelain -s -uall >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
+          echo "FILES_CHANGED<<EOF" >> $GITHUB_ENV
+          git status --porcelain -s -uall >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
       - name: Print git status
-        run: echo "${{ steps.git_check.outputs.FILES_CHANGED }}"
-      #   outputs:
-      #     files: ${{ steps.git_check.outputs.FILES_CHANGED }}
-
-      # raise-pr:
-      #   name: Raise a PR on data diff
-      #   runs-on: ubuntu-latest
-      #   needs: diff
-      #   steps:
-      #     - name: Access git status
-      #       run: |
-      #         echo "${{ needs.diff.outputs.files }}"
-      - name: Create Pull Request
-        if: steps.git_check.outputs.FILES_CHANGED != ''
-        uses: peter-evans/create-pull-request@v5-beta
-        with:
-          commit-message: "chore: data update on $(date +'%Y-%m-%d')"
-          branch: "chore/data-update-$(date +'%Y-%m-%d')"
-          delete-branch: true
-          title: "data update: $(date +'%Y-%m-%d')"
-          body: "Automated data update by GitHub action"
-          reviewers: "akshaybhalotia"
-          assignees: "akshaybhalotia"
+        run: echo "${{ env.FILES_CHANGED }}"
+      - name: Check date
+        id: date_check
+        run: echo "DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+      - name: Print date
+        run: echo "${{ env.DATE }}"
+      # - name: Create Pull Request
+      #   if: env.FILES_CHANGED != ''
+      #   uses: peter-evans/create-pull-request@v5-beta
+      #   with:
+      #     commit-message: "chore: data update on ${{ env.DATE }}"
+      #     branch: "chore/data-update-${{ env.DATE }}"
+      #     delete-branch: true
+      #     title: "data update: ${{ env.DATE }}"
+      #     body: "Automated data update by GitHub action"
+      #     reviewers: "akshaybhalotia"
+      #     assignees: "akshaybhalotia"
