@@ -39,15 +39,21 @@ jobs:
     needs: diff
     steps:
       - name: Access git status
-        run: echo "${{ needs.diff.outputs.files }}"
-      - name: Create Pull Request
-        if: needs.diff.outputs.files != ''
-        uses: peter-evans/create-pull-request@v4
-        with:
-          commit-message: "chore: data update on $(date +'%Y-%m-%d')"
-          branch: "chore/data-update-$(date +'%Y-%m-%d')"
-          delete-branch: true
-          title: "data update: $(date +'%Y-%m-%d')"
-          body: "Automated data update by GitHub action"
-          reviewers: "akshaybhalotia"
-          assignees: "akshaybhalotia"
+        run: |
+          echo "${{ needs.diff.outputs.files }}"
+          echo "$( pwd )"
+          echo "$( ls -a )"
+          cd ..
+          echo "$( pwd )"
+          echo "$( ls -a )"
+      # - name: Create Pull Request
+      #   if: needs.diff.outputs.files != ''
+      #   uses: peter-evans/create-pull-request@v5-beta
+      #   with:
+      #     commit-message: "chore: data update on $(date +'%Y-%m-%d')"
+      #     branch: "chore/data-update-$(date +'%Y-%m-%d')"
+      #     delete-branch: true
+      #     title: "data update: $(date +'%Y-%m-%d')"
+      #     body: "Automated data update by GitHub action"
+      #     reviewers: "akshaybhalotia"
+      #     assignees: "akshaybhalotia"
