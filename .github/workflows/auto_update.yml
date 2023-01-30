@@ -30,19 +30,19 @@ jobs:
           echo "EOF" >> $GITHUB_OUTPUT
       - name: Print git status
         run: echo "${{ steps.git_check.outputs.FILES_CHANGED }}"
-    outputs:
-      files: ${{ steps.git_check.outputs.FILES_CHANGED }}
+      #   outputs:
+      #     files: ${{ steps.git_check.outputs.FILES_CHANGED }}
 
-  raise-pr:
-    name: Raise a PR on data diff
-    runs-on: ubuntu-latest
-    needs: diff
-    steps:
-      - name: Access git status
-        run: |
-          echo "${{ needs.diff.outputs.files }}"
+      # raise-pr:
+      #   name: Raise a PR on data diff
+      #   runs-on: ubuntu-latest
+      #   needs: diff
+      #   steps:
+      #     - name: Access git status
+      #       run: |
+      #         echo "${{ needs.diff.outputs.files }}"
       - name: Create Pull Request
-        if: needs.diff.outputs.files != ''
+        if: steps.git_check.outputs.FILES_CHANGED != ''
         uses: peter-evans/create-pull-request@v5-beta
         with:
           commit-message: "chore: data update on $(date +'%Y-%m-%d')"
