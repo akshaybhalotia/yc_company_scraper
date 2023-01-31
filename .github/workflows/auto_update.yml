@@ -6,7 +6,7 @@ on:
     - cron: "13 13 13 * *" # on 13:13 of the 13th of every month
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   diff-and-raise-pr:
