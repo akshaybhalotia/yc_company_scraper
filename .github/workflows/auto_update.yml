@@ -38,7 +38,7 @@ jobs:
         run: echo "${{ env.DATE }}"
       - name: Create Pull Request
         if: env.FILES_CHANGED != ''
-        uses: peter-evans/create-pull-request@v5-beta
+        uses: peter-evans/create-pull-request@v5
         with:
           commit-message: "chore: data update on ${{ env.DATE }}"
           committer: "akshaybhalotia <github@axy.one>"
