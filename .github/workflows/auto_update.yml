@@ -14,13 +14,11 @@ jobs:
     name: Find diff and raise PR if there is a data change
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v7
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: "3.0"
-      - name: Install jq
-        uses: dcarbone/install-jq-action@v1.0.1
       - name: Run update script
         run: sh refresh_data.sh
       - name: Check git status
@@ -38,7 +36,7 @@ jobs:
         run: echo "${{ env.DATE }}"
       - name: Create Pull Request
         if: env.FILES_CHANGED != ''
-        uses: peter-evans/create-pull-request@v5
+        uses: peter-evans/create-pull-request@v8
         with:
           commit-message: "chore: data update on ${{ env.DATE }}"
           committer: "akshaybhalotia <github@axy.one>"
